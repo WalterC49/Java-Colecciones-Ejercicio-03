@@ -32,7 +32,7 @@ public class Ejercicio_03 {
         
         Scanner leer = new Scanner(System.in);
         ArrayList<Alumno> Alumnos = new ArrayList();
-        ArrayList<Integer> notas = new ArrayList();
+        ArrayList<Integer> notas;
         String nombre;
         String respuesta;
         boolean continuar=false;
@@ -40,15 +40,16 @@ public class Ejercicio_03 {
         do{
             System.out.print("Ingrese el nombre del alumno: ");
             nombre=leer.nextLine();
+            notas = new ArrayList();
             for(int i=0;i<3;i++){
-                System.out.print("Ingrese la "+i+"º nota del alumno: ");
+                System.out.print("Ingrese la "+(i+1)+"º nota del alumno: ");
                 notas.add(leer.nextInt());
             }
             
             Alumnos.add(new Alumno(nombre,notas));
             
             do{
-                System.out.print("¿Desea agregar otro alumno?(s/n) ");
+                System.out.print("\n¿Desea agregar otro alumno?(s/n) ");
                 respuesta = leer.next().toLowerCase();
                 switch(respuesta){
                     case "s":
@@ -61,30 +62,32 @@ public class Ejercicio_03 {
                         System.out.println("Opción no valida");
                 }
             }while(!(respuesta.equals("s")||respuesta.equals("n")));
-            
+            leer.nextLine();
         }while(continuar==true);
         
         AlumnoServicio alumS = new AlumnoServicio();
         String buscar;
         
         do{
-            System.out.print("Ingrese el nombre del alumno que desea saber su nota final: ");
+            System.out.print("\nIngrese el nombre del alumno que desea saber su nota final: ");
             buscar=leer.next();
-            if(Alumnos.contains(buscar)){
-                Alumnos.get(buscar);
-                alumS.notaFinal(Alumnos.get(Alumnos.get))
+            
+            for (Alumno i : Alumnos) {
+                if(i.getNombre().equals(buscar)){
+                    System.out.println("La nota final del alumno "+buscar+" es "+alumS.notaFinal(i)+".");
+                }
             }
             
             do{
-                System.out.print("¿Desea agregar otro alumno?(s/n) ");
+                System.out.print("\n¿Desea calcular la nota final de otro alumno?(s/n) ");
                 respuesta = leer.next().toLowerCase();
                 switch(respuesta){
                     case "s":
                         continuar=true;
-                        System.out.println("Hata prontos.");
                         break;
                     case "n":
                         continuar=false;
+                        System.out.println("Hasta prontos.");
                         break;
                     default:
                         System.out.println("Opción no valida");

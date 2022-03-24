@@ -13,7 +13,10 @@ import Entidades.Alumno;
  */
 public class AlumnoServicio {
     public int notaFinal(Alumno alum){
-        
-        return 0;
+        int notaF=0;
+        for (Integer i : alum.getNotas()) {
+            notaF+=i;
+        }
+        return notaF;
     }
 }
